@@ -94,14 +94,14 @@ class ResultHandler(webapp2.RequestHandler):
             template = jinja_environment.get_template('templates/result.html')
 
             if i == 0:
-                user_workout = {'food': food + ":", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
+                user_workout = {'food': food + " -", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
 
             else:
                 user_workout = {
                             'activity': activity,
                             'time': str(get_time()) + " minutes: "}
 
-            self.response.write(template.render(user_workout))
+            self.response.write(template.render(user_workout, i = i))
 
             i = i + 1;
 

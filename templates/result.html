@@ -7,10 +7,16 @@
   </head>
   <body>
 
-    <h1></h1>
+  {% if i < 1 %}
+   	<h1>To work off: {{food}} {{calorie}}</h1>
+   {% endif %}
 
     <table class="center">
-    <tr><td>{{food}} {{calorie}} </td> </tr>
+
+    {% if i< 1 %}
+    <h1>You can do:</h1>
+    {% endif %}
+
     <tr> <td>{{time}} {{activity}}</td></tr>
     </table>
 
