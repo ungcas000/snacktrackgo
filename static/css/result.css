@@ -1,9 +1,10 @@
-body {
-  text-align: center;
-  font-family: 'Hammersmith One';
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 20px;
+
+
+.center {
+	text-align: center;
+	position: relative;
+	width: 50%;
+	left: 25%;
+	font-size: 25pt;
+
 }

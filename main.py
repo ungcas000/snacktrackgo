@@ -64,14 +64,12 @@ class ResultHandler(webapp2.RequestHandler):
                          'Boxing (sparring)': 7.8 , 'Yoga': 2.3, 'Pilates': 2.3, 'Basketball': 6.5, 'Jumping Jacks': 8, 'Jump Rope': 12, 'Skateboard': 5,
                          'Soccer': 7, 'Surf': 3.0, 'Grocery Shopping': 2.3, 'Scrub Floors': 2.3, 'Run (5.5mph)': 8, 'Run (6 mph)': 10, 'Run (7.5 mph)': 12.5, 'Run (10 mph)': 16}
 
-        i = 0
+        i=0
 
-        d = collections.Dict(activity_list)
-        x = itertools.islice(d.items(), 0, 5)
 
-        # for key, value in activity_list.items():
-
-        for key, value in x:
+        for key, value in activity_list.items():
+            if i >= 5:
+                break
 
             gender = self.request.get('gender')
             gender = gender.lower()
@@ -95,22 +93,20 @@ class ResultHandler(webapp2.RequestHandler):
                 elif gender == "male":
                     return int(((calorie*24)/(met*bmrm))*60)
 
+
             template = jinja_environment.get_template('templates/result.html')
 
             if i == 0:
                 user_workout = {'food': food + ":", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
 
-            elif i <= 6:
+            else:
                 user_workout = {
                             'activity': activity,
                             'time': str(get_time()) + " minutes: "}
 
-            else:
-                user_workout = {}
-
             self.response.write(template.render(user_workout))
 
-            i = 1;
+            i = i + 1;
 
 
 
