@@ -67,9 +67,14 @@ class ResultHandler(webapp2.RequestHandler):
         i=0
 
 
-        for key, value in activity_list.items():
+        # for key, value in activity_list.items():
+        #     if i >= 5:
+        #         break
+
+        for key, value in sorted(activity_list.items(), key = lambda x: random.random()):
             if i >= 5:
                 break
+
 
             gender = self.request.get('gender')
             gender = gender.lower()
