@@ -30,8 +30,26 @@ class ResultHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/result.html')
         self.response.write(template.render())
 
+    def post(self):
+        gender = self.request.get('gender')
+        #calorie =
+        height = self.request.get('height')
+        weight = self.request.get('weight')
+        age = self.request.get('age')
+        #met =
+        bmrw = (9.56 * weight) + (1.85 * height) - (4.68 * age) + 655
+        bmwr = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
+
+        if gender == female:
+            return self.response.out.write((calorie*24)/(met*bmrw))
+
+        if gender == male:
+            return self.response.out.write((calorie*24)/(met*bmrw))
+
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/result') ResultHandler
+    ('/result', ResultHandler)
 ], debug=True)
