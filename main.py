@@ -53,8 +53,8 @@ class ResultHandler(webapp2.RequestHandler):
             return calorie_number;
 
         activity_list = {'run':1, 'walk':2, 'swim':3, 'bike':4, 'jog':5, 'boxing':6, 'yoga':7, 'pilates':8, 'dance':9, 'jump rope':10}
-
-        for key, value in activity_list.items():
+        i = 0
+        for key, value in activity_list.range():
             gender = self.request.get('gender')
             gender = gender.lower()
             activity = key
@@ -79,13 +79,17 @@ class ResultHandler(webapp2.RequestHandler):
 
             template = jinja_environment.get_template('templates/result.html')
 
-            user_workout = {
-                            'food': food,
+            if i == 0:
+                user_workout = {'food': food + ":", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
+
+            else:
+                user_workout = {
                             'activity': activity,
-                            'calorie': calorie,
-                            'time': get_time()}
+                            'time': str(get_time()) + " minutes: "}
 
             self.response.write(template.render(user_workout))
+
+            i = 1;
 
 
 
