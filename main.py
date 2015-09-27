@@ -23,23 +23,6 @@ import logging
 import random
 
 
-#Don't touch this part of the code!###############################################################
-def calorie:
-
-	raw_term = self.request.get('term', default_value="hunger games")								 #
-    term = raw_term.replace(" ", "+")																 #
-    if term == "":																					 #
-        term = "can+you+not"																		 #
-        pass																						 #
-    food_source = urlfetch.fetch(																	 #
-        'https://service.livestrong.com/service/food/foods/?query=' + term + '&limit=1&fill=cals')   #
-    food_JSON = food_source.content																	 #
-    calorie_dict = json.loads(food_JSON)															 #
-    calorie = int(calorie_dict['foods'][0]['cals'])
-    return calorie;											 #
-		#Seriously, don't touch above this line!#########################################################
-
-
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
@@ -53,28 +36,52 @@ class ResultHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
     def post(self):
+        def get_calorie():
+            raw_term = self.request.get('food', default_value="hunger games")
+            term = raw_term.replace(" ", "+")
+            if term == "":
+                term = "can+you+not"
+                pass
+            food_source = urlfetch.fetch(
+                'https://service.livestrong.com/service/food/foods/?query=' + term + '&limit=1&fill=cals')
+            food_JSON = food_source.content
+            calorie_dict = json.loads(food_JSON)
+            calorie_number = int(calorie_dict['foods'][0]['cals'])
+            return calorie_number;
 
         gender = self.request.get('gender')
-        activity =
-        calorie = calorie()
-        met =
-        height = self.request.get('height')
-        weight = self.request.get('weight')
-        age = self.request.get('age')
+        gender = gender.lower()
+        activity = "run"
+        calorie = get_calorie()
+        met = 8
+        food = self.request.get('food')
+        height = int(self.request.get('height'))
+        height = height * 2.54
+        weight = int(self.request.get('weight'))
+        weight = weight/2.2046
+        age = int(self.request.get('age'))
         bmrw = (9.56 * weight) + (1.85 * height) - (4.68 * age) + 655
         bmrm = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
 
-        if gender == female:
-            return self.response.out.write(template.render({
-                        'activity': activity,
-                        'calorie': calorie,
-                        'time': (calorie*24)/(met*bmrw)}))
+        def get_time():
 
-        if gender == male:
-            return self.response.out.write(template.render({
+            if gender == "female":
+                return int(((calorie*24)/(met*bmrw))*60)
+
+            elif gender == "male":
+                return int(((calorie*24)/(met*bmrm))*60)
+
+        template = jinja_environment.get_template('templates/result.html')
+
+        user_workout = {
+                        'food': food,
                         'activity': activity,
                         'calorie': calorie,
-                        'time': (calorie*24)/(met*bmrm)}))
+                        'time': get_time()}
+
+        self.response.write(template.render(user_workout))
+
+
 
 
 
