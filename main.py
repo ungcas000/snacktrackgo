@@ -21,6 +21,9 @@ import jinja2
 import os
 import logging
 import random
+from random import shuffle
+import itertools
+import collections
 
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -62,8 +65,14 @@ class ResultHandler(webapp2.RequestHandler):
                          'Soccer': 7, 'Surf': 3.0, 'Grocery Shopping': 2.3, 'Scrub Floors': 2.3, 'Run (5.5mph)': 8, 'Run (6 mph)': 10, 'Run (7.5 mph)': 12.5, 'Run (10 mph)': 16}
 
         i = 0
-        
-        for key, value in activity_list.items():
+
+        d = collections.Dict(activity_list)
+        x = itertools.islice(d.items(), 0, 5)
+
+        # for key, value in activity_list.items():
+
+        for key, value in x:
+
             gender = self.request.get('gender')
             gender = gender.lower()
             activity = key
@@ -91,10 +100,13 @@ class ResultHandler(webapp2.RequestHandler):
             if i == 0:
                 user_workout = {'food': food + ":", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
 
-            else:
+            elif i <= 6:
                 user_workout = {
                             'activity': activity,
                             'time': str(get_time()) + " minutes: "}
+
+            else:
+                user_workout = {}
 
             self.response.write(template.render(user_workout))
 
