@@ -23,7 +23,21 @@ import logging
 import random
 
 
+#Don't touch this part of the code!###############################################################
+def calorie:
 
+	raw_term = self.request.get('term', default_value="hunger games")								 #
+    term = raw_term.replace(" ", "+")																 #
+    if term == "":																					 #
+        term = "can+you+not"																		 #
+        pass																						 #
+    food_source = urlfetch.fetch(																	 #
+        'https://service.livestrong.com/service/food/foods/?query=' + term + '&limit=1&fill=cals')   #
+    food_JSON = food_source.content																	 #
+    calorie_dict = json.loads(food_JSON)															 #
+    calorie = int(calorie_dict['foods'][0]['cals'])
+    return calorie;											 #
+		#Seriously, don't touch above this line!#########################################################
 
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -40,22 +54,9 @@ class ResultHandler(webapp2.RequestHandler):
 
     def post(self):
 
-    	#Don't touch this part of the code!###############################################################
-    	raw_term = self.request.get('term', default_value="hunger games")								 #
-        term = raw_term.replace(" ", "+")																 #
-        if term == "":																					 #
-            term = "can+you+not"																		 #
-            pass																						 #
-        food_source = urlfetch.fetch(																	 #
-            'https://service.livestrong.com/service/food/foods/?query=' + term + '&limit=1&fill=cals')   #
-        food_JSON = food_source.content																	 #
-        calorie_dict = json.loads(food_JSON)															 #
-        calorie = int(calorie_dict['foods'][0]['cals']))												 #
-		#Seriously, don't touch abouve this line!#########################################################
-
         gender = self.request.get('gender')
         activity =
-        calorie = 
+        calorie = calorie()
         met =
         height = self.request.get('height')
         weight = self.request.get('weight')
