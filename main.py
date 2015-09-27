@@ -54,7 +54,7 @@ class ResultHandler(webapp2.RequestHandler):
 
         activity_list = {'run':1, 'walk':2, 'swim':3, 'bike':4, 'jog':5, 'boxing':6, 'yoga':7, 'pilates':8, 'dance':9, 'jump rope':10}
 
-        for key, value in activity_list.item():
+        for key, value in activity_list.items():
             gender = self.request.get('gender')
             gender = gender.lower()
             activity = key
