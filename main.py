@@ -52,7 +52,13 @@ class ResultHandler(webapp2.RequestHandler):
             calorie_number = int(calorie_dict['foods'][0]['cals'])
             return calorie_number;
 
-        activity_list = {'run':1, 'walk':2, 'swim':3, 'bike':4, 'jog':5, 'boxing':6, 'yoga':7, 'pilates':8, 'dance':9, 'jump rope':10}
+        activity_list = {'Stand': 1.3, 'Light Gardening': 2, 'Light Office Work': 2, 'Walking Up and Down Stairs': 2.5,
+                         'Cook': 2.5, 'Light Housekeeping': 2.5, 'Walking Dog': 2.5, 'Slow Dancing': 3, 'Golf': 3,
+                         'Bowl': 3, 'Fish': 3, 'Washing Car': 3, 'Walking at a Brisk Pace': 3.5, 'Heavy Yard Work': 4,
+                         'Moderate Lifting': 4, 'Slow Swim': 4.5, 'Doubles Tennis': 5, 'Rapid Dancing': 5, 'Slow Jog (1 mile/ 13 minutes)': 6,
+                         'Ice Skate': 6, "Roller Skate": 6, 'Hike': 7, 'Row': 7, 'Canoeing': 7, 'Kayaking': 8, 'Bike (10-16 mph)': 8, 'Ski': 8,
+                         'Boxing (sparring)': 7.8 , 'Yoga': 2.3, 'Pilates': 2.3, 'Basketball': 6.5, 'Jumping Jacks': 8, 'Jump Rope': 12, 'Skateboard': 5,
+                         'Soccer': 7, 'Surf': 3.0, 'Grocery Shopping': 2.3, 'Scrub Floors': 2.3, 'Run (5.5mph)': 8, 'Run (6 mph)': 10, 'Run (7.5 mph)': 12.5, 'Run (10 mph)': 16}
 
         for key, value in activity_list.items():
             gender = self.request.get('gender')
