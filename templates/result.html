@@ -6,6 +6,7 @@
     <title>Workout</title>
   </head>
   <body>
+  <div>
 
   {% if i < 1 %}
    	<h1>To work off: {{food}} {{calorie}}</h1>
@@ -21,7 +22,13 @@
     </table>
 
 
-    </table>
+    {% if i >= 4 %}
+    <form method="get" action="/">
+    	<input type="submit" value="Go back">
+    </form>
+    {% endif %}
+
+    </div>
 
   </body>
 </html>
