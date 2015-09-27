@@ -50,11 +50,11 @@ class ResultHandler(webapp2.RequestHandler):
             'https://service.livestrong.com/service/food/foods/?query=' + term + '&limit=1&fill=cals')   #
         food_JSON = food_source.content																	 #
         calorie_dict = json.loads(food_JSON)															 #
-        calorie = int(calorie_dict['foods'][0]['cals']))												 #
+        calorie = int(calorie_dict['foods'][0]['cals'])												 #
 		#Seriously, don't touch abouve this line!#########################################################
 
         gender = self.request.get('gender')
-        activity =
+        activity = 
         calorie =
         met =
         height = self.request.get('height')
