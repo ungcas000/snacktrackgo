@@ -52,6 +52,7 @@ class ResultHandler(webapp2.RequestHandler):
             calorie_number = int(calorie_dict['foods'][0]['cals'])
             return calorie_number;
 
+
         activity_list = {'Stand': 1.3, 'Light Gardening': 2, 'Light Office Work': 2, 'Walking Up and Down Stairs': 2.5,
                          'Cook': 2.5, 'Light Housekeeping': 2.5, 'Walk Dog': 2.5, 'Slow Dance': 3, 'Golf': 3,
                          'Bowl': 3, 'Fish': 3, 'Wash Car': 3, 'Walk at a Brisk Pace': 3.5, 'Heavy Yard Work': 4,
@@ -60,6 +61,8 @@ class ResultHandler(webapp2.RequestHandler):
                          'Boxing (sparring)': 7.8 , 'Yoga': 2.3, 'Pilates': 2.3, 'Basketball': 6.5, 'Jumping Jacks': 8, 'Jump Rope': 12, 'Skateboard': 5,
                          'Soccer': 7, 'Surf': 3.0, 'Grocery Shopping': 2.3, 'Scrub Floors': 2.3, 'Run (5.5mph)': 8, 'Run (6 mph)': 10, 'Run (7.5 mph)': 12.5, 'Run (10 mph)': 16}
 
+        i = 0
+        
         for key, value in activity_list.items():
             gender = self.request.get('gender')
             gender = gender.lower()
@@ -85,13 +88,17 @@ class ResultHandler(webapp2.RequestHandler):
 
             template = jinja_environment.get_template('templates/result.html')
 
-            user_workout = {
-                            'food': food,
+            if i == 0:
+                user_workout = {'food': food + ":", 'activity': activity,'calorie': str(calorie) + " calories", 'time': str(get_time()) + " minutes: "}
+
+            else:
+                user_workout = {
                             'activity': activity,
-                            'calorie': calorie,
-                            'time': get_time()}
+                            'time': str(get_time()) + " minutes: "}
 
             self.response.write(template.render(user_workout))
+
+            i = 1;
 
 
 
