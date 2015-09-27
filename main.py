@@ -32,19 +32,26 @@ class ResultHandler(webapp2.RequestHandler):
 
     def post(self):
         gender = self.request.get('gender')
-        #calorie =
+        activity =
+        calorie =
+        met =
         height = self.request.get('height')
         weight = self.request.get('weight')
         age = self.request.get('age')
-        #met =
         bmrw = (9.56 * weight) + (1.85 * height) - (4.68 * age) + 655
-        bmwr = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
+        bmrm = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
 
         if gender == female:
-            return self.response.out.write((calorie*24)/(met*bmrw))
+            return self.response.out.write(template.render({
+                        'activity': activity,
+                        'calorie': calorie,
+                        'time': (calorie*24)/(met*bmrw)}))
 
         if gender == male:
-            return self.response.out.write((calorie*24)/(met*bmrw))
+            return self.response.out.write(template.render({
+                        'activity': activity,
+                        'calorie': calorie,
+                        'time': (calorie*24)/(met*bmrm)}))
 
 
 
