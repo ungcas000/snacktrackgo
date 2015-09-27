@@ -23,7 +23,7 @@ import logging
 import random
 
 
-       
+
 
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -55,7 +55,7 @@ class ResultHandler(webapp2.RequestHandler):
 
         gender = self.request.get('gender')
         activity =
-        calorie =
+        calorie = 
         met =
         height = self.request.get('height')
         weight = self.request.get('weight')
