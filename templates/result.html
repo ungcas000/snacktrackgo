@@ -5,20 +5,20 @@
     <link rel="stylesheet" type="text/css" href="../static/css/result.css">
     <title>Workout</title>
   </head>
-  <body>
+  <body >
   <div>
 
   {% if i < 1 %}
-   	<h1>To work off: {{food}} {{calorie}}</h1>
+   	<h1 class="text">To work off: {{food}} {{calorie}}</h1>
    {% endif %}
 
     <table class="center">
 
     {% if i< 1 %}
-    <h1>You can do:</h1>
+    <h1 class="text">You can do:</h1>
     {% endif %}
 
-    <tr> <td>{{time}} {{activity}}</td></tr>
+    <tr> <td class="text">{{time}} {{activity}}</td></tr>
     </table>
 
 
